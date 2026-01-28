@@ -4,7 +4,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Image, Pressable, StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 // Datos de ejemplo para las reseñas
 const reviews = [
@@ -37,7 +37,7 @@ const reviews = [
 export default function ProductsScreen() {
     return (
         <View style={styles.container}>
-            <ScrollView 
+            <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}
             >
@@ -113,7 +113,7 @@ export default function ProductsScreen() {
                         </View>
 
                         {reviews.map((review) => (
-                            <View key={review.id} style={styles.reviewCard}>    
+                            <View key={review.id} style={styles.reviewCard}>
                                 <View style={styles.reviewHeader}>
                                     <Image
                                         source={{ uri: review.avatar }}
@@ -211,12 +211,12 @@ const styles = StyleSheet.create({
         width: "100%",
         padding: 20,
         marginTop: -36,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
+        borderRadius: 10,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: -3 },
+        shadowOffset: { width: 0, height: 5 },
         shadowOpacity: 0.15,
         shadowRadius: 8,
+        elevation: 10,
     },
     box2: {
         backgroundColor: '#fff',
@@ -281,7 +281,6 @@ const styles = StyleSheet.create({
         color: '#1c1c4a',
     },
     quantityControl: {
-        paddingTop: 16,
         flexDirection: 'row',
         alignItems: 'center',
         gap: 16,
