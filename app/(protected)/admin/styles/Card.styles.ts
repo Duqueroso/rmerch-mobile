@@ -1,3 +1,4 @@
+import { Colors } from "@/constants/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -24,7 +25,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    color: "#A8A8C4",
+    color: Colors.light.secondary,
     marginBottom: 8,
     fontWeight: "500",
   },
