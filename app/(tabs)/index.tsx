@@ -81,7 +81,10 @@ export default function HomeScreen() {
           directory. This will move the current{" "}
           <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+          {/* THIS LINKS WORKS TO VIEW ALL PAGES I AM WORKING */}
           <Link href={"/(protected)/admin/admin"}>ADMIN</Link>
+          <Link href={"/(public)/Login/login"}>LOGIN</Link>
+          {/* THIS LINKS WORKS TO VIEW ALL PAGES I AM WORKING */}
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
