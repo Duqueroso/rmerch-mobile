@@ -50,7 +50,6 @@ export default function TabLayout() {
         listeners={{
           tabPress: (e) => {
             if (!isAuthenticated) {
-              // Evita que se seleccione la pestaña y redirige a home
               e.preventDefault();
               router.push("/(tabs)/home");
             }
