@@ -5,8 +5,27 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Octicons from '@expo/vector-icons/Octicons';
+import { useAuth } from '../context/AuthContext';
+import { useRouter } from 'expo-router';
+import { useEffect } from 'react';
 
 export default function Profile() {
+
+    const router = useRouter()
+
+    const { isAuthenticated, user, logout, isLoading } = useAuth()
+
+    useEffect(() => {
+        if (!isLoading && !isAuthenticated) {
+            router.replace("/(tabs)/home");
+        }
+    }, [isLoading, isAuthenticated, router]);
+
+    if (isLoading) return null;
+
+
+
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
             <ScrollView scrollEnabled={true}>
@@ -27,8 +46,8 @@ export default function Profile() {
 
                                 </LinearGradient>
                                 <View>
-                                    <Text style={Style.nameUser}>Estudiante RIWI</Text>
-                                    <Text style={Style.emailUser}>estudiante@riwi.edu.co</Text>
+                                    <Text style={Style.nameUser}>{user?.name}</Text>
+                                    <Text style={Style.emailUser}>{user?.email}</Text>
                                 </View>
                             </View>
                             <View style={Style.settingsIcon}>
@@ -72,8 +91,8 @@ export default function Profile() {
                                 </View>
                             </View>
                         </View>
-                    
-                        <View style={{ padding: 20}}>
+
+                        <View style={{ padding: 20 }}>
                             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
 
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
@@ -95,7 +114,7 @@ export default function Profile() {
                     </View>
                 </View>
                 <View style={Style.pressableSignOutContainer}>
-                    <Pressable style={Style.pressableSignOut}>
+                    <Pressable style={Style.pressableSignOut} onPress={logout}>
                         <Octicons name="sign-out" size={20} color="#f33514" />
                         <Text style={{ color: "#f33514", fontWeight: "light", fontSize: 15 }}>Cerrar sesión</Text>
                     </Pressable>
@@ -221,7 +240,7 @@ const Style = StyleSheet.create({
         borderRadius: 10,
         justifyContent: "center",
         alignItems: "center",
-        flexDirection:"row",
-        gap:10
+        flexDirection: "row",
+        gap: 10
     }
 })
