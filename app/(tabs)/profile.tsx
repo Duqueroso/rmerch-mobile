@@ -8,7 +8,6 @@ import Octicons from '@expo/vector-icons/Octicons';
 
 export default function Profile() {
     return (
-
         <SafeAreaView style={{ flex: 1, backgroundColor: "#ffffff" }}>
             <ScrollView scrollEnabled={true}>
                 <LinearGradient
@@ -73,79 +72,8 @@ export default function Profile() {
                                 </View>
                             </View>
                         </View>
-                        <View style={{ padding: 20, borderBottomColor: "#928e8e", borderBottomWidth: 0.5 }}>
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
-
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-                                    <View style={Style.iconActionBarContainer}>
-                                        <Feather name="heart" size={20} color="#6B5CFA" />
-                                    </View>
-                                    <View>
-                                        <Text>Lista de deseos</Text>
-                                    </View>
-                                </View>
-
-
-                                <View>
-                                    <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ padding: 20, borderBottomColor: "#928e8e", borderBottomWidth: 0.5 }}>
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
-
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-                                    <View style={Style.iconActionBarContainer}>
-                                        <Feather name="credit-card" size={20} color="#6B5CFA" />
-                                    </View>
-                                    <View>
-                                        <Text>Mis productos</Text>
-                                    </View>
-                                </View>
-
-
-                                <View>
-                                    <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ padding: 20, borderBottomColor: "#928e8e", borderBottomWidth: 0.5 }}>
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
-
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-                                    <View style={Style.iconActionBarContainer}>
-                                        <Feather name="bell" size={20} color="#6B5CFA" />
-                                    </View>
-                                    <View>
-                                        <Text>Mis productos</Text>
-                                    </View>
-                                </View>
-
-
-                                <View>
-                                    <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ padding: 20, borderBottomColor: "#928e8e", borderBottomWidth: 0.5 }}>
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
-
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-                                    <View style={Style.iconActionBarContainer}>
-                                        <Feather name="shield" size={20} color="#6B5CFA" />
-                                    </View>
-                                    <View>
-                                        <Text>Mis productos</Text>
-                                    </View>
-                                </View>
-
-
-                                <View>
-                                    <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ padding: 20, borderBottomColor: "#928e8e", borderBottomWidth: 0.5 }}>
+                    
+                        <View style={{ padding: 20}}>
                             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
 
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
@@ -153,7 +81,7 @@ export default function Profile() {
                                         <AntDesign name="question-circle" size={20} color="#6B5CFA" />
                                     </View>
                                     <View>
-                                        <Text>Mis productos</Text>
+                                        <Text>Preguntas frecuentes</Text>
                                     </View>
                                 </View>
 
@@ -163,24 +91,7 @@ export default function Profile() {
                                 </View>
                             </View>
                         </View>
-                        <View style={{ padding: 20 }}>
-                            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }}>
 
-                                <View style={{ flexDirection: "row", alignItems: "center", gap: 15 }}>
-                                    <View style={Style.iconActionBarContainer}>
-                                        <Feather name="settings" size={20} color="#6B5CFA" />
-                                    </View>
-                                    <View>
-                                        <Text>Configuración</Text>
-                                    </View>
-                                </View>
-
-
-                                <View>
-                                    <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
-                                </View>
-                            </View>
-                        </View>
                     </View>
                 </View>
                 <View style={Style.pressableSignOutContainer}>
