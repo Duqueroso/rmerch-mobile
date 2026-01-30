@@ -5,7 +5,9 @@ export default function ExploreScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Explore</Text>
-      <Link href={"/(public)/Login/login"}>KLK</Link>
+      {/* THIS LINKS ARE TEMPORAL */}
+      <Link href={"/(public)/Login/login"}>Login</Link>
+      <Link href={"/(protected)/admin/admin"}>Vista de admin</Link>
       <Text style={styles.subtitle}>Esta pantalla está en desarrollo</Text>
     </View>
   );

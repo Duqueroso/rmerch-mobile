@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, Text, View } from "react-native";
-import Form from "./components/Form";
+import Form from "../../../components/auth/Login/components/Form";
 
 const Login = () => {
   return (
@@ -33,7 +33,7 @@ const Login = () => {
             R
           </Text>
         </View>
-        
+
         <Text
           style={{
             fontSize: 32,
@@ -55,7 +55,7 @@ const Login = () => {
         </Text>
       </LinearGradient>
 
-      {/* Formulario */}
+      {/* Form */}
       <View style={{ marginTop: -60 }}>
         <Form />
       </View>

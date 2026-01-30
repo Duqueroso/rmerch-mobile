@@ -37,7 +37,7 @@ const Form = () => {
                 router.replace("/(protected)/admin/admin");
               },
             },
-          ]
+          ],
         );
       }
     } catch (error) {
