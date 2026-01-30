@@ -173,12 +173,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#ffffff",
     },
     scrollContent: {
-        paddingBottom: 120, // Espacio para el footer fijo
+        paddingBottom: 120, 
     },
     box: {
         position: 'relative',
         height: 320,
-        backgroundColor: '#ffd000'
+        backgroundColor: '#ffffff'
     },
     header: {
         position: 'absolute',
