@@ -1,8 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, Text, View } from "react-native";
-import Card from "./components/Card/Card";
-import { styles } from "./styles/Admin.styles";
+import Card from "./_components/Card/Card";
+import { styles } from "./_styles/Admin.styles";
 
 const Admin = () => {
   return (

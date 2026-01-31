@@ -1,6 +1,6 @@
 import { Pressable, Text, View } from "react-native";
-import { CardProps } from "../../dto/CardProps";
-import { styles } from "../../styles/Card.styles";
+import { CardProps } from "../../_dto/CardProps";
+import { styles } from "../../_styles/Card.styles";
 
 const Card = ({ text, image, value, style, onPress }: CardProps) => {
   return (
