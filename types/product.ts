@@ -7,6 +7,7 @@ export interface Product {
   reviewCount: number;
   image: string;
   badge?: "Oferta" | "Nuevo";
+  stock?:number;
 }
 
 export interface Category {

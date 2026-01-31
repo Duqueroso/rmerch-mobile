@@ -6,6 +6,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useAuth } from "../context/AuthContext";
+import { Alert } from "react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -49,10 +50,11 @@ export default function TabLayout() {
         }}
         listeners={{
           tabPress: (e) => {
-            if (!isAuthenticated) {
-              e.preventDefault();
-              router.push("/(tabs)/home");
-            }
+            Alert.alert(
+              "Ups!",
+              "Debes iniciar sesion para ingresar a esta seccion"
+            );
+            router.replace("/(tabs)/home");
           },
         }}
       />
