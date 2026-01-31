@@ -1,50 +1,36 @@
-# Welcome to your Expo app 👋
+# Feature/Admin View
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Components Structure
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/(protected)/admin/
+├── admin.tsx                 # Main admin screen
+├── layout.tsx               # Admin layout wrapper
+├── components/
+│   └── Card/
+│       └── Card.tsx         # Reusable metric/action card
+├── dto/
+│   └── CardProps.ts         # Card component interface
+└── styles/
+    ├── Admin.styles.ts      # Admin screen styles
+    └── Card.styles.ts       # Card component styles
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Color Palette
 
-## Learn more
+- **Primary Purple**: `#4C3BCF`, `#5B4AC9`, `#2D1B69`
+- **Accent Blue**: `#5856FF`
+- **Background**: `#F8F9FE`
+- **Text**: `#1A1A2E` (primary), `#A8A8C4` (secondary), `#B8B8D1` (tertiary)
+- **Card Background**: `#FFFFFF`
+- **Icon Container**: `#F3E8FF`
 
-To learn more about developing your project with Expo, look at the following resources:
+## Navigation
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+Access the admin view at route: `/admin`
 
-## Join the community
+## Dependencies
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- `expo-linear-gradient` - For gradient backgrounds
+- `@expo/vector-icons` - For Ionicons icons
+- `react-native` - Core components
