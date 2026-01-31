@@ -32,14 +32,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         )}
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => onAddToCart?.(product.id)}
+          onPress={() => onAddToCart?.(product._id)}
         >
           <Ionicons name="add" size={24} color="#FFFFFF" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.category}>{product.category.toUpperCase()}</Text>
         <Text style={styles.name} numberOfLines={2}>
           {product.name}
         </Text>

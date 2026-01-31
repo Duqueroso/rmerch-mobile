@@ -1,13 +1,13 @@
 export interface Product {
-  id: string;
+  _id: string;
   name: string;
-  category: string;
   price: number;
   originalPrice?: number;
   rating: number;
   reviewCount: number;
   image: string;
   badge?: "Oferta" | "Nuevo";
+  stock?:number;
 }
 
 export interface Category {
