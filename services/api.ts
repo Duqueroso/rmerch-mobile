@@ -1,6 +1,7 @@
-import { URL_BACKEND } from "@env";
+import Config from 'react-native-config'
 
-const API_URL = URL_BACKEND || "https://rmerchback.vercel.app/api";
+
+const API_URL = process.env.API_URL;
 
 export const api = {
   async get<T>(endpoint: string): Promise<T> {
