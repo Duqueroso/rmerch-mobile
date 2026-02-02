@@ -1,8 +1,9 @@
-import { URL_BACKEND } from "@env";
+import Config from 'react-native-config'
 import { api } from "./api";
 
 // Test de conectividad con el backend
 export const testConnection = async () => {
+  const URL_BACKEND = process.env.API_URL;
   try {
     console.log("Testing connection to:", URL_BACKEND);
     const response = await fetch(`${URL_BACKEND}/products`);

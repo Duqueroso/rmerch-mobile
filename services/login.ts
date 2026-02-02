@@ -1,7 +1,8 @@
-import { URL_BACKEND } from "@env";
-import axios from "axios";
 
-const API_URL = URL_BACKEND || "https://rmerchback.vercel.app/api";
+import axios from "axios";
+import Config from 'react-native-config'
+
+const API_URL = process.env.API_URL;
 
 // Interfaces
 export interface LoginCredentials {
