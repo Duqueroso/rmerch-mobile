@@ -64,15 +64,12 @@ export default function HomeScreen() {
   // Filtrar productos por categoría y búsqueda
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const matchesCategory =
-        selectedCategory === "all" || product.category === selectedCategory;
       const matchesSearch =
         searchQuery === "" ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.category.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+      return matchesSearch;
     });
-  }, [products, selectedCategory, searchQuery]);
+  }, [products, searchQuery]);
 
   const handleAddToCart = (productId: string) => {
     // TODO: Implementar lógica de carrito
@@ -151,7 +148,7 @@ export default function HomeScreen() {
               <View style={styles.productsGrid}>
                 {filteredProducts.map((product) => (
                   <ProductCard
-                    key={product.id}
+                    key={product._id}
                     product={product}
                     onAddToCart={handleAddToCart}
                   />
