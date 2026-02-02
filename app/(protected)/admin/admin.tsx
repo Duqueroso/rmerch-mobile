@@ -1,8 +1,9 @@
+import Card from "@/components/admin/components/Card/Card";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
-import Card from "./components/Card/Card";
-import { styles } from "./styles/Admin.styles";
+import { styles } from "../../../components/admin/styles/Admin.styles";
 
 const Admin = () => {
   return (
@@ -29,13 +30,17 @@ const Admin = () => {
               text="Productos Activos"
               image={<Ionicons name="cube-outline" size={28} color="#5856FF" />}
               value={0}
-              onPress={() => {}}
+              onPress={() => {
+                router.replace("/(protected)/admin/items/ActiveProducts");
+              }}
             />
             <Card
               text="Órdenes"
               image={<Ionicons name="cart-outline" size={28} color="#5856FF" />}
               value={0}
-              onPress={() => {}}
+              onPress={() => {
+                router.replace("/(protected)/admin/items/Orders");
+              }}
             />
             <Card
               text="Usuarios Registrados"
@@ -43,7 +48,9 @@ const Admin = () => {
                 <Ionicons name="people-outline" size={28} color="#5856FF" />
               }
               value={2}
-              onPress={() => {}}
+              onPress={() => {
+                router.replace("/(protected)/admin/items/Users");
+              }}
             />
           </View>
 

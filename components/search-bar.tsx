@@ -15,13 +15,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <Ionicons name="search" size={20} color="#9CA3AF" style={styles.icon} />
+      <Ionicons name="search" size={20} color="#222" style={styles.icon} />
       <TextInput
         style={styles.input}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor="#9CA3AF"
+        placeholderTextColor="#888"
       />
     </View>
   );
@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     marginHorizontal: 20,
+    borderWidth: 1,
+    borderColor: "#D1D5DB", // gris claro
   },
   icon: {
     marginRight: 10,
@@ -43,6 +45,6 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: "#FFFFFF",
+    color: "#222", // texto negro
   },
 });
