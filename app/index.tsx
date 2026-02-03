@@ -1,12 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useAuth } from "@/app/context/AuthContext";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
-export default function Page() {
+export default function Index() {
+  const { isAuthenticated, isLoading, user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (isAuthenticated && user) {
+        // Si está autenticado, redirigir al home
+        router.replace("/(tabs)/home");
+      } else {
+        // Si no está autenticado, ir al login
+        router.replace("/(public)/Login/login");
+      }
+    }
+  }, [isLoading, isAuthenticated, user, router]);
+
+  // Mostrar loading mientras verifica la autenticación
   return (
     <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
+      <ActivityIndicator size="large" color="#5856FF" />
     </View>
   );
 }
@@ -15,20 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 24,
-  },
-  main: {
-    flex: 1,
     justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
+    backgroundColor: "#fff",
   },
 });

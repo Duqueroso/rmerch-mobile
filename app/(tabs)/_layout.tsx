@@ -1,12 +1,10 @@
 import { Tabs, useRouter } from "expo-router";
-import React from "react";
 
 import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useAuth } from "../context/AuthContext";
-import { Alert } from "react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -33,29 +31,35 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      {/* Tab Login - Solo visible cuando NO está autenticado */}
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
+          title: "Login",
+          href: isAuthenticated ? null : "/(tabs)/explore",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="paperplane.fill" color={color} />
+            <IconSymbol size={28} name="person.fill" color={color} />
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: 'Perfil',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="person" color={color} />,
         }}
         listeners={{
           tabPress: (e) => {
-            Alert.alert(
-              "Ups!",
-              "Debes iniciar sesion para ingresar a esta seccion"
-            );
-            router.replace("/(tabs)/home");
+            if (!isAuthenticated) {
+              router.push("/(public)/Login/login");
+            }
           },
+        }}
+      />
+
+      {/* Tab Perfil - Solo visible cuando SÍ está autenticado */}
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Perfil",
+          href: isAuthenticated ? "/(tabs)/profile" : null,
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="person" color={color} />
+          ),
         }}
       />
     </Tabs>

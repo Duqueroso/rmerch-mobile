@@ -1,25 +1,23 @@
-import React, { createContext, useState, useEffect, useContext } from "react";
+import { LoginCredentials, loginService, User } from "@/services/login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { User, LoginCredentials, loginService } from "@/services/login";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthContextType {
-  user: User | null; 
-  token: string | null; 
-  isAuthenticated: boolean; 
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
   isLoading: boolean;
-  login: (credentials: LoginCredentials) => Promise<void>; 
+  login: (credentials: LoginCredentials) => Promise<void>;
   logout: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true); 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const checkAuth = async () => {
     try {
@@ -33,34 +31,40 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setIsAuthenticated(true);
         console.log("Sesión restaurada");
       } else {
-        console.log("No hay sesión guardada");
+        console.log("No hay sesión guardada", savedUser);
       }
     } catch (error) {
       console.error("Error al verificar autenticación:", error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
-
 
   const login = async (credentials: LoginCredentials) => {
     try {
       setIsLoading(true);
 
+      console.log("Intentando login con:", credentials.email);
+
       const response = await loginService.login(credentials);
 
+      console.log("Respuesta del servidor:", JSON.stringify(response, null, 2));
 
+      // Guardar el token y el usuario en AsyncStorage
       await AsyncStorage.setItem("authToken", response.token);
       await AsyncStorage.setItem("user", JSON.stringify(response.user));
 
+      // Actualizar el estado
       setToken(response.token);
       setUser(response.user);
       setIsAuthenticated(true);
 
       console.log("Login exitoso:", response.user.name);
     } catch (error: any) {
-      console.error("Error en login:", error.message);
-      throw error; 
+      console.error("Error en login:", error);
+      console.error("Error message:", error.message);
+      console.error("Error response:", error.response?.data);
+      throw error;
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +73,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const logout = async () => {
     try {
       setIsLoading(true);
-
 
       await AsyncStorage.removeItem("authToken");
       await AsyncStorage.removeItem("user");
