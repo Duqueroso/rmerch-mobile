@@ -1,3 +1,4 @@
+import { useAuth } from "@/app/context/AuthContext";
 import Card from "@/components/admin/components/Card/Card";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
@@ -6,6 +7,8 @@ import { ScrollView, Text, View } from "react-native";
 import { styles } from "../../../components/admin/styles/Admin.styles";
 
 const Admin = () => {
+  const { user, isAuthenticated } = useAuth();
+
   return (
     <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -18,7 +21,9 @@ const Admin = () => {
           <View style={styles.headerContent}>
             <View style={[{ padding: 10 }]}>
               <Text style={styles.headerTitle}>Panel de Administración</Text>
-              <Text style={styles.headerSubtitle}>Bienvenido, Jackson</Text>
+              <Text style={styles.headerSubtitle}>
+                Bienvenido, {user?.name || "Usuario"}
+              </Text>
             </View>
             <Ionicons name="settings-outline" size={28} color="#fff" />
           </View>

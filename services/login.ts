@@ -1,8 +1,6 @@
-
 import axios from "axios";
-import Config from 'react-native-config'
 
-const API_URL = process.env.API_URL;
+const API_URL = "https://rmerchback.vercel.app/api";
 
 // Interfaces
 export interface LoginCredentials {
@@ -32,25 +30,43 @@ export const loginService = {
    */
   async login(credentials: LoginCredentials): Promise<LoginResponse> {
     try {
+      console.log("Enviando petición a:", `${API_URL}/login`);
+      console.log("Email:", credentials.email);
+
       const response = await axios.post<LoginResponse>(
-        `${API_URL}/auth/login`,
+        `${API_URL}/login`,
         credentials,
       );
 
+      console.log("Status:", response.status);
+      console.log("Data recibida:", JSON.stringify(response.data, null, 2));
+
+      // Validar que la respuesta tenga la estructura esperada
+      if (!response.data.token || !response.data.user) {
+        throw new Error("Respuesta del servidor inválida");
+      }
+
       return response.data;
     } catch (error: any) {
-      console.error("Error en login:", error);
+      console.error("Error completo:", error);
+      console.error("Error response:", error.response?.data);
+      console.error("Error status:", error.response?.status);
 
       if (error.response?.status === 401) {
-        throw new Error("Credenciales inválidas");
+        throw new Error(
+          "Credenciales inválidas. Verifica tu email y contraseña.",
+        );
       } else if (error.response?.status === 404) {
         throw new Error("Usuario no encontrado");
       } else if (error.response?.data?.message) {
         throw new Error(error.response.data.message);
+      } else if (error.message) {
+        throw new Error(error.message);
       }
 
-      throw new Error("Error al iniciar sesión. Por favor, intenta de nuevo.");
+      throw new Error(
+        "Error al iniciar sesión. Por favor, verifica tu conexión a internet.",
+      );
     }
-  }
-  ,
+  },
 };

@@ -1,47 +1,41 @@
+import { useAuth } from "@/app/context/AuthContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Alert, Pressable, Text, View } from "react-native";
 import { authenticateBiometric } from "../services/biometric.service";
-import { login } from "../services/login";
-import { getToken, saveToken } from "../services/token.service";
+import { getToken } from "../services/token.service";
 import { FormStyles } from "../styles/Form.styles";
 import FormItems from "./FormItems";
 
 const Form = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const { login } = useAuth();
 
   const sendData = async () => {
     try {
-      const res = await login({ email, password });
-      const data = await res.data;
-      if (res.status === 200) {
-        Alert.alert(
-          "¿Acceso biométrico?",
-          "¿Quieres usar huella o Face ID para tus próximas sesiones?",
-          [
-            {
-              text: "No",
-              onPress: () => {
-                router.replace("/(protected)/admin/admin");
-              },
-              style: "cancel",
-            },
-            {
-              text: "Sí",
-              onPress: async () => {
-                await saveToken(data.token); // Asegúrate que data.token es el JWT
-                router.replace("/(protected)/admin/admin");
-              },
-            },
-          ],
-        );
-      }
-    } catch (error) {
-      alert(error);
+      setIsLoading(true);
+
+      // Usa el login del AuthContext que ya maneja todo correctamente
+      await login({ email, password });
+
+      console.log("Login exitoso, redirigiendo...");
+
+      // Redirige después de login exitoso
+      router.replace("/(tabs)/home");
+    } catch (error: any) {
+      console.error("Error en login:", error);
+      Alert.alert(
+        "Error de inicio de sesión",
+        error.message || "Credenciales inválidas. Por favor, intenta de nuevo.",
+        [{ text: "OK" }],
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -50,8 +44,8 @@ const Form = () => {
     if (success) {
       const token = await getToken();
       if (token) {
-        // Aquí navega al home o dashboard
-        router.replace("/(protected)/admin/admin");
+        // Aquí navega al home
+        router.replace("/(tabs)/home");
       } else {
         alert("No hay sesión guardada.");
       }
@@ -117,10 +111,10 @@ const Form = () => {
                 paddingHorizontal: 30,
                 alignItems: "center",
                 justifyContent: "center",
+                opacity: isLoading ? 0.7 : 1,
               }}
-              onPress={() => {
-                sendData();
-              }}
+              onPress={sendData}
+              disabled={isLoading}
             >
               <Text
                 style={{
@@ -129,7 +123,7 @@ const Form = () => {
                   fontWeight: "600",
                 }}
               >
-                Iniciar sesión
+                {isLoading ? "Iniciando sesión..." : "Iniciar sesión"}
               </Text>
             </Pressable>
           </LinearGradient>
