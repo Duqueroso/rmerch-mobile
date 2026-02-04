@@ -1,4 +1,4 @@
-import { useAuth } from "@/app/context/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import Card from "@/components/admin/components/Card/Card";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";

@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Octicons from '@expo/vector-icons/Octicons';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'expo-router';
 import { useEffect } from 'react';
 

@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/product-card";
 import { SearchBar } from "@/components/search-bar";
 import { SpecialOfferBanner } from "@/components/special-offer-banner";
 import { categories } from "@/data/mockData";
+import { useCart } from "@/contexts/CartContext";
 import { productService } from "@/services/productService";
 import { Product } from "@/types/product";
 import { Ionicons } from "@expo/vector-icons";
@@ -18,6 +19,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,6 +27,8 @@ export default function HomeScreen() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const { addItem, totalItems } = useCart();
 
   // Cargar productos desde el backend
   useEffect(() => {
@@ -71,9 +75,9 @@ export default function HomeScreen() {
     });
   }, [products, searchQuery]);
 
-  const handleAddToCart = (productId: string) => {
-    // TODO: Implementar lógica de carrito
-    console.log("Añadir al carrito:", productId);
+  const handleAddToCart = (product: Product) => {
+    // Se agrega al contexto global para reflejar contador en el icono del carrito.
+    addItem(product);
   };
 
   return (
@@ -95,10 +99,26 @@ export default function HomeScreen() {
               <Text style={styles.greeting}>Hola, 👋</Text>
               <Text style={styles.userName}>Estudiante RIWI</Text>
             </View>
-            <TouchableOpacity style={styles.notificationButton}>
-              <Ionicons name="notifications" size={24} color="#FFFFFF" />
-              <View style={styles.notificationBadge} />
-            </TouchableOpacity>
+            <View style={styles.headerActions}>
+              <TouchableOpacity style={styles.iconButton}>
+                <Ionicons name="notifications" size={22} color="#FFFFFF" />
+                <View style={styles.notificationBadge} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.iconButton}
+                onPress={() => router.push("/(tabs)/cart")}
+              >
+                <Ionicons name="cart" size={22} color="#FFFFFF" />
+                {/* Badge del carrito para mostrar cantidad total de items */}
+                {totalItems > 0 && (
+                  <View style={styles.cartBadge}>
+                    <Text style={styles.cartBadgeText}>
+                      {totalItems > 9 ? "9+" : totalItems}
+                    </Text>
+                  </View>
+                )}
+              </TouchableOpacity>
+            </View>
           </View>
 
           <SearchBar
@@ -206,7 +226,12 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     marginTop: 4,
   },
-  notificationButton: {
+  headerActions: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+  iconButton: {
     position: "relative",
     padding: 8,
   },
@@ -220,6 +245,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#F59E0B",
     borderWidth: 2,
     borderColor: "#5B21B6",
+  },
+  cartBadge: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+    minWidth: 18,
+    height: 18,
+    paddingHorizontal: 4,
+    borderRadius: 9,
+    backgroundColor: "#F97316",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: "#5B21B6",
+  },
+  cartBadgeText: {
+    color: "#FFFFFF",
+    fontSize: 10,
+    fontWeight: "700",
   },
   productsSection: {
     paddingHorizontal: 20,

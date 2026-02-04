@@ -4,7 +4,7 @@ import { HapticTab } from "@/components/haptic-tab";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -60,6 +60,15 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <IconSymbol size={28} name="person" color={color} />
           ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: "Carrito",
+          // Se registra la ruta para navegación interna (icono en Home) sin mostrar tab extra.
+          href: null,
         }}
       />
     </Tabs>

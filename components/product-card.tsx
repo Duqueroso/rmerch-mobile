@@ -5,7 +5,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart?: (productId: string) => void;
+  // Se pasa el producto completo para que el carrito pueda guardar detalles sin otra consulta.
+  onAddToCart?: (product: Product) => void;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -32,7 +33,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         )}
         <TouchableOpacity
           style={styles.addButton}
-          onPress={() => onAddToCart?.(product._id)}
+          onPress={() => onAddToCart?.(product)}
         >
           <Ionicons name="add" size={24} color="#FFFFFF" />
         </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { useAuth } from '@/app/context/AuthContext'
+import { useAuth } from '@/contexts/AuthContext'
 import { MyProductCard } from '@/components/MyProductCard/MyProductCard'
 import { deleteProductByUser, getProductByIdUser } from '@/services/user/productServices'
 

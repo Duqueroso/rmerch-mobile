@@ -5,6 +5,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useCart } from '@/contexts/CartContext';
+import { Product } from '@/types/product';
 
 // Datos de ejemplo para las reseñas
 const reviews = [
@@ -35,6 +37,18 @@ const reviews = [
 ];
 
 export default function ProductsScreen() {
+    const { addItem } = useCart();
+    // Producto demo para permitir flujo "Agregar al carrito" mientras el backend no conecta.
+    const demoProduct: Product = {
+        _id: 'papas-limon',
+        name: 'Papas de limon',
+        price: 50000,
+        rating: 4.9,
+        reviewCount: 128,
+        image: 'https://productoselcaribe.com/wp-content/uploads/2023/12/caribenew2_0016_caribe-web-009.jpg',
+        badge: 'Nuevo',
+    };
+
     return (
         <View style={styles.container}>
             <ScrollView
@@ -149,7 +163,7 @@ export default function ProductsScreen() {
                     </View>
                     <Pressable
                         style={styles.addToCartButton}
-                        onPress={() => console.log('Agregar al carrito')}
+                        onPress={() => addItem(demoProduct)}
                     >
                         <LinearGradient
                             colors={['#1c1c4a', '#6458ee']}

@@ -1,3 +1,4 @@
+// Nota: este contexto vive fuera de /app para que Expo Router no lo trate como ruta.
 import { LoginCredentials, loginService, User } from "@/services/login";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
