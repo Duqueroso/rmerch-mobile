@@ -1,9 +1,12 @@
-import Config from 'react-native-config'
 import { api } from "./api";
 
 // Test de conectividad con el backend
 export const testConnection = async () => {
-  const URL_BACKEND = process.env.API_URL;
+  const URL_BACKEND =
+    process.env.EXPO_PUBLIC_API_URL ||
+    process.env.URL_BACKEND ||
+    process.env.API_URL ||
+    "https://rmerchback.vercel.app/api";
   try {
     console.log("Testing connection to:", URL_BACKEND);
     const response = await fetch(`${URL_BACKEND}/products`);

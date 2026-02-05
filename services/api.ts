@@ -1,7 +1,7 @@
 import Config from 'react-native-config'
 
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.URL_BACKEND || process.env.EXPO_PUBLIC_API_URL;
 
 export const api = {
   async get<T>(endpoint: string): Promise<T> {
