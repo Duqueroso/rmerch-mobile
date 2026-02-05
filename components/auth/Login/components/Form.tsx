@@ -210,7 +210,10 @@ const Form = () => {
       <View style={{ alignItems: "center", marginVertical: 20 }}>
         <Text style={{ color: "#666", fontSize: 14 }}>
           ¿No tienes cuenta?{" "}
-          <Text style={{ color: "#5F4CAF", fontWeight: "bold" }}>
+          <Text
+            style={{ color: "#5F4CAF", fontWeight: "bold" }}
+            onPress={() => router.replace("/(public)/Register/register")}
+          >
             Regístrate
           </Text>
         </Text>
