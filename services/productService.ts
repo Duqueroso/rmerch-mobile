@@ -1,4 +1,5 @@
 import { Product } from "@/types/product";
+import axios from "axios";
 import { api } from "./api";
 
 export interface ProductsResponse {
@@ -14,18 +15,19 @@ export const productService = {
    */
   async getAllProducts(): Promise<Product[]> {
     try {
-      const response = await api.get<any>("/products");
-      console.log("API Response:", response);
+      const response = await axios.get(
+        "https://rmerchback.vercel.app/api/products",
+      );
 
       // Manejar diferentes estructuras de respuesta
       if (Array.isArray(response)) {
-        return response;
+        return response.data.data;
       }
-      if (response.products && Array.isArray(response.products)) {
-        return response.products;
+      if (response.data.data && Array.isArray(response.data.data)) {
+        return response.data.data;
       }
-      if (response.data && Array.isArray(response.data)) {
-        return response.data;
+      if (response.data.data && Array.isArray(response.data.data)) {
+        return response.data.data;
       }
 
       console.warn("Unexpected API response format:", response);

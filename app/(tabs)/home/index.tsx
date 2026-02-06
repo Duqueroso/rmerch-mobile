@@ -7,7 +7,7 @@ import { productService } from "@/services/productService";
 import { Product } from "@/types/product";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -36,13 +36,7 @@ export default function HomeScreen() {
       setLoading(true);
       setError(null);
 
-      console.log("=== Iniciando carga de productos ===");
       const data = await productService.getAllProducts();
-      console.log("Productos recibidos:", {
-        esArray: Array.isArray(data),
-        cantidad: data?.length || 0,
-        primerProducto: data?.[0],
-      });
 
       // Asegurar que siempre sea un array
       if (Array.isArray(data)) {
@@ -66,7 +60,7 @@ export default function HomeScreen() {
     return products.filter((product) => {
       const matchesSearch =
         searchQuery === "" ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase());
       return matchesSearch;
     });
   }, [products, searchQuery]);

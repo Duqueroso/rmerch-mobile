@@ -1,7 +1,7 @@
 import { Tabs, useRouter } from "expo-router";
 
 import { HapticTab } from "@/components/haptic-tab";
-import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Icon } from "@/components/ui/icon-symbol";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useAuth } from "../context/AuthContext";
@@ -14,33 +14,38 @@ export default function TabLayout() {
   // Mientras se restaura la sesión, evitamos renderizar las tabs para no generar redirecciones prematuras
   if (isLoading) return null;
 
+  // Map route names to icon identifiers (can use prefixed family or alias keys)
+  const iconForRoute: Record<string, string> = {
+    home: "material:home",
+    productView: "material:visibility",
+    // Use a cross-platform Ionicons name to ensure visibility
+    createProduct: "ion:add-circle-outline",
+    explore: "material:person",
+    profile: "material:person",
+  };
+
   return (
     <Tabs
-      screenOptions={{
+      screenOptions={({ route }) => ({
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
         tabBarButton: HapticTab,
-      }}
+        tabBarIcon: ({ color, size = 24 }) => (
+          <Icon
+            name={iconForRoute[route.name] ?? "material:home"}
+            size={28}
+            color={color}
+          />
+        ),
+      })}
     >
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
-          ),
-        }}
-      />
+      <Tabs.Screen name="home" options={{ title: "Home" }} />
 
-      {/* Tab Login - Solo visible cuando NO está autenticado */}
       <Tabs.Screen
         name="explore"
         options={{
           title: "Login",
           href: isAuthenticated ? null : "/(tabs)/explore",
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person.fill" color={color} />
-          ),
         }}
         listeners={{
           tabPress: (e) => {
@@ -51,15 +56,14 @@ export default function TabLayout() {
         }}
       />
 
-      {/* Tab Perfil - Solo visible cuando SÍ está autenticado */}
+      <Tabs.Screen name="productView" options={{ title: "ProductView" }} />
+      <Tabs.Screen name="createProduct" options={{ title: "CreateProduct" }} />
+
       <Tabs.Screen
         name="profile"
         options={{
           title: "Perfil",
           href: isAuthenticated ? "/(tabs)/profile" : null,
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person" color={color} />
-          ),
         }}
       />
     </Tabs>

@@ -19,13 +19,10 @@ const Form = () => {
   const sendData = async () => {
     try {
       setIsLoading(true);
-
-      // Usa el login del AuthContext que ya maneja todo correctamente
       await login({ email, password });
 
       console.log("Login exitoso, redirigiendo...");
 
-      // Redirige después de login exitoso
       router.replace("/(tabs)/home");
     } catch (error: any) {
       console.error("Error en login:", error);
@@ -44,7 +41,6 @@ const Form = () => {
     if (success) {
       const token = await getToken();
       if (token) {
-        // Aquí navega al home
         router.replace("/(tabs)/home");
       } else {
         alert("No hay sesión guardada.");
