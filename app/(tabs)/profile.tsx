@@ -2,7 +2,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import Feather from '@expo/vector-icons/Feather';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Octicons from '@expo/vector-icons/Octicons';
 import { useAuth } from '../context/AuthContext';
@@ -17,6 +17,10 @@ export default function Profile() {
 
     useEffect(() => {
         if (!isLoading && !isAuthenticated) {
+            Alert.alert(
+                "Ups!",
+                "Debes iniciar sesion para ingresar a esta seccion"
+            );
             router.replace("/(tabs)/home");
         }
     }, [isLoading, isAuthenticated, router]);
@@ -33,7 +37,7 @@ export default function Profile() {
                     style={Style.headerContainer}
                     start={{ x: 0, y: 0 }}
                     end={{ x: 1, y: 0 }}
-                    colors={["#1C1C4A", "#6B5CFA"]}>
+                    colors={["#5B21B6", "#6366F1", "#3B82F6"]}>
                     <View style={Style.profileHeaderContainer}>
                         <View>
                             <Text style={Style.myPerfil}>Mi perfil</Text>
@@ -87,7 +91,12 @@ export default function Profile() {
 
 
                                 <View>
-                                    <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+                                    <Pressable onPress={() => {
+                                        router.push("/(protected)/user/userProducts")
+                                    }}>
+                                        <MaterialIcons name="keyboard-arrow-right" size={24} color="black" />
+                                    </Pressable>
+
                                 </View>
                             </View>
                         </View>
